@@ -1,0 +1,11 @@
+__pycache__
+.local
+.cache
+.coverage
+.idea
+.vscode
+Dockerfile
+.git/
+.gitlab-ci.yml
+.yarn/cache
+.yarn/unplugged

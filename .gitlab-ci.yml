@@ -1,0 +1,87 @@
+# TODO: for open source, should we include this scan.yml ?
+include:
+  - project: "Crucible/devops/gitlab-ci-templates"
+    file: "azure-acr-v2.yml"
+
+stages:
+  # each jon is defined in one of these CI pipeline stages
+  # TODO: do we need scan stage for this open source project?
+  - build
+  - release
+  - scan
+  - deploy
+
+variables:
+  IMAGE_BUILD: $CI_REGISTRY_IMAGE:build
+  IMAGE_LATEST: $CI_REGISTRY_IMAGE:latest
+  # The name of your app
+  PLATFORM_APP_NAME: ui
+  # The namespace of your app
+  PLATFORM_NAMESPACE: snowballgr
+
+  # For Azure ACR stuff/pushing to Azure ACR (do not change)
+  AZURE_ACR_REPO: crucibleplatform.azurecr.io/${PLATFORM_NAMESPACE}/${PLATFORM_APP_NAME}
+
+.docker-login-script: &docker-login-script
+  - echo $CI_REGISTRY_PASSWORD | docker login -u $CI_REGISTRY_USER --password-stdin $CI_REGISTRY
+
+build:
+  stage: build
+  script:
+    - *docker-login-script
+    - docker pull --quiet $IMAGE_BUILD || true
+    - docker build
+      --target build
+      --cache-from $IMAGE_BUILD
+      --tag $IMAGE_BUILD
+      .
+    - docker push $IMAGE_BUILD
+
+  tags:
+    - aws
+    - crucible
+    - docker
+
+release:
+  extends: .push_to_azure_acr
+  stage: release
+
+  before_script:
+    - *docker-login-script
+    - docker pull --quiet $IMAGE_BUILD || true
+    - docker pull --quiet $IMAGE_LATEST || true
+    - docker build
+      --cache-from $IMAGE_BUILD
+      --cache-from $IMAGE_LATEST
+      --tag $IMAGE_LATEST
+      --tag ${AZURE_ACR_REPO}:${BRANCH_BUILD_NUM}
+      .
+    - docker push $IMAGE_LATEST
+  tags:
+    - aws
+    - crucible
+    - docker
+
+scan:
+  extends: .scan
+  stage: scan
+  tags:
+    - crucible
+    - docker
+    - aws
+
+deploy:
+  extends: .deploy_to_azure_aks
+  stage: deploy
+  only:
+    refs:
+      - dev
+      - prod
+  environment: $CI_COMMIT_REF_SLUG
+  before_script:
+    - *docker-login-script
+    - echo "Deploying to Azure AKS"
+  tags:
+    - aws
+    - crucible
+    - docker

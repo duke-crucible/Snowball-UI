@@ -1,0 +1,11 @@
+@import "~antd/dist/antd.css";
+
+.app {
+  margin: 20px;
+}
+
+.cohort-title {
+  text-align: center;
+  font-size: 18px;
+  color: black;
+}

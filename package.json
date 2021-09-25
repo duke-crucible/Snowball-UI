@@ -1,0 +1,53 @@
+{
+  "name": "react-table",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "@ant-design/icons": "^4.6.2",
+    "antd": "^4.14.0",
+    "async-validator": "^4.0.2",
+    "axios": "^0.21.1",
+    "fbemitter": "^3.0.0",
+    "lodash": "^4.17.21",
+    "prop-types": "^15.5.7",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-router-dom": "^5.2.0",
+    "react-signature-canvas": "^1.0.3",
+    "survey-react": "^1.8.51",
+    "web-vitals": "^1.0.1"
+  },
+  "scripts": {
+    "start": "chmod +x ./env.sh && ./env.sh && cp env-config.js ./public/ && react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^5.11.10",
+    "@testing-library/react": "^11.1.0",
+    "@testing-library/user-event": "^12.1.10",
+    "eslint-config-react-app": "^6.0.0",
+    "eslint-plugin-jest": "^24.4.0",
+    "prettier": "2.2.1",
+    "react-scripts": "^4.0.3"
+  }
+}

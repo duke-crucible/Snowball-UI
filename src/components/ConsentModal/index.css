@@ -1,0 +1,22 @@
+.dialog-tips {
+  text-align: center;
+  color: black;
+}
+
+.dialog-footer {
+  margin: 30px 0 0;
+  text-align: center;
+}
+
+.dialog-footer .ant-btn {
+  width: 150px;
+}
+
+.choose-btn {
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.3);
+  margin-bottom: 20px;
+}
+
+.ant-upload-hint {
+  padding: 10px 0;
+}

@@ -1,0 +1,80 @@
+.editable-table {
+  min-width: 100%;
+  max-width: 100%;
+}
+
+.editable-cell {
+  position: relative;
+}
+
+.editable-cell-value-wrap {
+  padding: 5px 12px;
+  cursor: pointer;
+}
+
+.columns-hidden {
+  display: none;
+}
+
+.table-top {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.table-top .table-column-filter {
+  margin-left: auto;
+}
+
+.editable-row:hover .editable-cell-value-wrap {
+  /* padding: 4px 11px; */
+  /* border: 1px solid #d9d9d9; */
+  /* border-radius: 4px */
+}
+
+.clickable-cell {
+  display: block;
+  cursor: pointer;
+  height: 44px;
+  width: 100%;
+  line-height: 44px;
+}
+
+.clickable-cell:hover {
+  text-decoration: underline;
+}
+
+.record-row {
+  line-height: 30px;
+}
+
+.comment-list {
+  margin-top: 20px;
+}
+
+.comment-list h2 {
+  font-weight: bolder;
+  font-size: 22px;
+}
+
+.record-infor h2 {
+  font-weight: bolder;
+  font-size: 22px;
+}
+
+.comment {
+  margin-bottom: 25px;
+}
+
+.comment h3 {
+  color: #999;
+  font-weight: bolder;
+}
+
+.comment p {
+  font-weight: bolder;
+}
+
+[data-theme="dark"] .editable-row:hover .editable-cell-value-wrap {
+  border: 1px solid #434343;
+}

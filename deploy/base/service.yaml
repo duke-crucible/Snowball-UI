@@ -1,0 +1,27 @@
+---
+# See also: https://gitlab.dhe.duke.edu/Crucible/devops/app-platform/blob/main/developers.md#configuration
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  # The name of your app
+  name: ui
+  # The namespace of your app
+  namespace: snowballgr
+  # TODO:  Uncomment the below to protect the app behind the proxy.
+  # labels:
+  # serving.knative.dev/visibility: cluster-local
+
+spec:
+  template:
+    spec:
+      containers:
+        # The image name must match your app name. The pipeline will replace it with the correct value.
+        - image: ui
+          ports:
+            # The port that the app is listening on
+            - containerPort: 3000
+              protocol: TCP
+          # Store environment variables in a ConfigMap. See config.yaml in this folder.
+          envFrom:
+            - configMapRef:
+                name: ui

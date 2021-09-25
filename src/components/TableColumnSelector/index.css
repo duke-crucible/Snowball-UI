@@ -1,0 +1,13 @@
+.column-group {
+  display: felx !important;
+  flex-direction: column;
+  background-color: white;
+}
+
+.ant-checkbox-wrapper {
+  margin-left: 8px;
+}
+
+.table-column-filter {
+  margin-top: 10px;
+}
